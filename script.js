@@ -60,6 +60,8 @@ function playGame() {
         console.log(score);
     }
 
+// End of game
+
     if(score.human === score.computer){
         console.log("Thats a draw ! What a game !");
     }else if (score.human > score.computer) {
