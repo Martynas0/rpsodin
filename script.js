@@ -29,38 +29,18 @@ const playRound = function(humanChoice, computerChoice) {
         console.log("Thats a DRAW");
         return "draw";
     }
-    if (humanChoice === "rock") {
-
-        if(computerChoice === "scissors") {
-            console.log("You win ! Rock beats scissors !");
-            return "win";
-        }else{
-            console.log("You lose ! Paper beats rock...")
-            return "lose";   
-        }
-
-    }else if(humanChoice === "scissors") {
-
-        if(computerChoice === "paper") {
-            console.log("You win ! Scissors beats paper !");
-            return "win";
-        }else{
-            console.log("You lose ! Rock beats scissors...")
-            return "lose";    
-        }
-
-    }else if(humanChoice === "paper") {
-
-        if(computerChoice === "rock") {
-            console.log("You win ! Paper beats rock !");
-            return "win";
-        }else{
-            console.log("You lose ! Scissors beats paper...")
-            return "lose";   
-        }
-
+    
+    if(humanChoice === "rock" && computerChoice === "scissors" ||
+       humanChoice === "scissors" && computerChoice === "paper" ||
+       humanChoice === "paper" && computerChoice === "rock") 
+       {
+        console.log(`You win ! ${humanChoice} beats ${computerChoice} !`);
+        return "win";
+    }else {
+        console.log(`You lose ! ${computerChoice} beats ${humanChoice} !`);
+        return "lose";
     }
-
+    
 }
 
 function playGame() {
