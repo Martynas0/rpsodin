@@ -4,6 +4,11 @@ let score = {
 };
 let round = 1;
 const history = document.querySelector("ul");
+const message = document.querySelector(".message");
+const resetButton = document.createElement("button");
+const p = document.querySelector("p");
+resetButton.textContent = "Restart Game...";
+resetButton.setAttribute("id", "reset");
 
 const getComputerChoice = function() {
     let randomNumber = Math.floor(Math.random() * 3);
@@ -41,22 +46,37 @@ function isWiningChoice (humanChoice, computerChoice) {
             humanChoice === "paper" && computerChoice === "rock"
 }
 
-const choiceMenu = document.addEventListener("click", (event) => {
+document.addEventListener("click", (event) => {
     const choice = event.target.id;
-    if(choice !== "" && round <= 5) {
+    if(choice !== "" && round <= 5 && choice !== "reset") {
         play(choice, getComputerChoice());
+    }
+    else if (choice === "reset") {
+        resetGame();
     }
 })
 
 function updateScore(result, humanChoice, computerChoice) {
-    const p = document.querySelector("p");
+    
     addToList(result, humanChoice, computerChoice);
     if (round >= 6) {
         p.style.backgroundColor = "purple";
         p.textContent = `The game is finished... ${getWinner()}`;
-        score.human = 0;
-        score.computer = 0;
+        message.appendChild(resetButton);
     }   
+}
+
+function resetGame () {
+    score.human = 0;
+    score.computer = 0;
+    round = 1;
+    p.textContent = "Empty message....";
+    p.style.backgroundColor = "white";
+    const x = document.querySelectorAll("li");
+    x.forEach((element) => {
+        element.remove();
+    })
+    resetButton.remove();
 }
 
 function addToList (result, humanChoice, computerChoice) {
@@ -75,7 +95,6 @@ function addToList (result, humanChoice, computerChoice) {
         li.style.backgroundColor = "yellow";
         li.textContent = "It's a draw...";
     }
-    console.log(history);
     history.appendChild(li);
 }
 
