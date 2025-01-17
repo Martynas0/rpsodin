@@ -3,7 +3,7 @@ let score = {
     human : 0
 };
 let round = 1;
-
+const history = document.querySelector("ul");
 
 const getComputerChoice = function() {
     let randomNumber = Math.floor(Math.random() * 3);
@@ -50,24 +50,33 @@ const choiceMenu = document.addEventListener("click", (event) => {
 
 function updateScore(result, humanChoice, computerChoice) {
     const p = document.querySelector("p");
-    if (round > 5) {
+    addToList(result, humanChoice, computerChoice);
+    if (round >= 6) {
         p.style.backgroundColor = "purple";
         p.textContent = `The game is finished... ${getWinner()}`;
         score.human = 0;
         score.computer = 0;
+    }   
+}
 
-    }else if (result === "win") {
-        score.human++;
-        p.style.backgroundColor = "green";
-        p.textContent = `You win ! ${humanChoice} beats ${computerChoice} !`;
-    }else if (result === "lose"){
-        score.computer++;
-        p.style.backgroundColor = "red";
-        p.textContent = `you lose ! ${computerChoice} beats ${humanChoice}...`;
-    }else{
-        p.style.backgroundColor = "yellow";
-        p.textContent = "It's a draw...";
+function addToList (result, humanChoice, computerChoice) {
+    const li = document.createElement("li");
+    if (result === "win") {
+        score.human++
+        li.style.backgroundColor = "green";
+        li.textContent = `You win ! ${humanChoice} beats ${computerChoice} !`;
     }
+    else if(result === "lose") {
+        score.computer++
+        li.style.backgroundColor = "red";
+        li.textContent = `you lose ! ${computerChoice} beats ${humanChoice}...`;
+    }
+    else if (result === "draw") {
+        li.style.backgroundColor = "yellow";
+        li.textContent = "It's a draw...";
+    }
+    console.log(history);
+    history.appendChild(li);
 }
 
 function getWinner() {
