@@ -24,10 +24,7 @@ const play = function(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         result = "draw";
     }
-    else if(humanChoice === "rock" && computerChoice === "scissors" ||
-       humanChoice === "scissors" && computerChoice === "paper" ||
-       humanChoice === "paper" && computerChoice === "rock") 
-       {
+    else if(isWiningChoice(humanChoice, computerChoice)) {
         result = "win";
     }
     else {
@@ -38,6 +35,11 @@ const play = function(humanChoice, computerChoice) {
     updateScore(result, humanChoice, computerChoice);
 }
 
+function isWiningChoice (humanChoice, computerChoice) {
+    return humanChoice === "rock" && computerChoice === "scissors" ||
+            humanChoice === "scissors" && computerChoice === "paper" ||
+            humanChoice === "paper" && computerChoice === "rock"
+}
 
 const choiceMenu = document.addEventListener("click", (event) => {
     const choice = event.target.id;
